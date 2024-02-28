@@ -1,20 +1,3 @@
-/*import * as CryptoJS from "crypto-js";
-
-const loadPassword = () => {
-  var ciphertext = CryptoJS.AES.encrypt(
-    "123",
-    "ee825e8b544c44575e0645c9d9c21cd7"
-  ).toString();
-
-  console.log({ ciphertext });
-  return ciphertext;
-};
-
-export default async function Home() {
-  await loadPassword();
-  return <p>hola mundo</p>;
-}*/
-
 "use client";
 
 import { useState } from "react";
