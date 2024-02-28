@@ -23,7 +23,8 @@
       "@components/*": ["components/*"],
       "@layout/*": ["layout/*"],
       "@utils": ["utils"],
-      "@lib/*": ["lib/*"]
+      "@lib/*": ["lib/*"],
+      "@services": ["services"]
     },
     "noUnusedLocals": true,
     "noUnusedParameters": true

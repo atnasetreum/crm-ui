@@ -21,7 +21,6 @@ import { useState } from "react";
 
 import { useRouter } from "next/navigation";
 
-import axios from "axios";
 import { toast } from "sonner";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -35,6 +34,7 @@ import Typography from "@mui/material/Typography";
 
 import Copyright from "@layout/Copyright";
 import { emailIsValid, encryptPassword } from "@utils";
+import { AuthService } from "@services";
 
 export interface Data {
   token: string;
@@ -70,25 +70,12 @@ export default function LoginPage() {
     }
 
     setIsLoading(true);
-    axios
-      .post(
-        "http://localhost:3030/api/v1/auth/login",
-        {
-          email: emailClean,
-          password: encryptPassword(passwordClean),
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            ["x-app-key"]: "b9d6243649ae10793480024881668902", //process.env.NEXT_PUBLIC_API_KEY as string,
-          },
-          withCredentials: true,
-        }
-      )
+
+    AuthService.login({
+      email: emailClean,
+      password: encryptPassword(passwordClean),
+    })
       .then(() => router.push("/dashboard"))
-      .catch((error) =>
-        toast.error(error?.response?.data?.message || error.message)
-      )
       .finally(() => setIsLoading(false));
   };
 
