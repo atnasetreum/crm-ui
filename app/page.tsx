@@ -171,6 +171,7 @@ export default async function LoginPage() {
   await loadData();
   return <p>hola mundo</p>;
 }*/
+
 /*
 "use client";
 
