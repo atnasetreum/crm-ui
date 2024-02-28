@@ -174,7 +174,6 @@ export default async function LoginPage() {
 
 /*
 "use client";
-
 import { gql } from "@apollo/client";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import { useEffect } from "react";
