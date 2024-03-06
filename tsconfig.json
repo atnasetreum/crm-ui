@@ -24,7 +24,9 @@
       "@layout/*": ["layout/*"],
       "@utils": ["utils"],
       "@lib/*": ["lib/*"],
-      "@services": ["services"]
+      "@services": ["services"],
+      "@hooks": ["hooks"],
+      "@store": ["store"]
     },
     "noUnusedLocals": true,
     "noUnusedParameters": true
