@@ -13,6 +13,7 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import BusinessIcon from "@mui/icons-material/Business";
+import Tooltip from "@mui/material/Tooltip";
 
 import { AuthService } from "@services";
 import { notify } from "@utils";
@@ -31,13 +32,15 @@ function CreateLink({
   const pathname = usePathname();
 
   return (
-    <ListItemButton
-      onClick={() => router.push(url)}
-      selected={pathname.startsWith(url)}
-    >
-      <ListItemIcon>{icon}</ListItemIcon>
-      <ListItemText primary={title} />
-    </ListItemButton>
+    <Tooltip title={title} placement="right">
+      <ListItemButton
+        onClick={() => router.push(url)}
+        selected={pathname.startsWith(url)}
+      >
+        <ListItemIcon>{icon}</ListItemIcon>
+        <ListItemText primary={title} />
+      </ListItemButton>
+    </Tooltip>
   );
 }
 
@@ -46,7 +49,7 @@ export const MainListItems = () => {
     <>
       <CreateLink url="/dashboard" title="Dashboard" icon={<DashboardIcon />} />
 
-      <CreateLink url="/project" title="Proyectos" icon={<BusinessIcon />} />
+      <CreateLink url="/projects" title="Proyectos" icon={<BusinessIcon />} />
 
       <CreateLink
         url="/clients"

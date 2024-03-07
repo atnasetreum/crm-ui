@@ -26,7 +26,9 @@
       "@lib/*": ["lib/*"],
       "@services": ["services"],
       "@hooks": ["hooks"],
-      "@store": ["store"]
+      "@store": ["store"],
+      "@interfaces": ["interfaces"],
+      "@shared/*": ["shared/*"]
     },
     "noUnusedLocals": true,
     "noUnusedParameters": true
