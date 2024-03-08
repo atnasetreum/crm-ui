@@ -12,12 +12,18 @@ export interface Client {
   name: string;
   phone: string;
   email: string;
+  status: string;
+  birthdate: Date;
+  reasonRejection: string;
+  origin: string;
+  campaignType: string;
   isActive: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
 
 export interface SearchParamsClientsProps {
+  searchParam?: string;
   page?: number;
   limit?: number;
 }

@@ -1,9 +1,5 @@
 "use client";
 
-import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
-
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
@@ -18,6 +14,8 @@ import {
   TablePaginationActions,
 } from "@shared/components";
 import { Client } from "@interfaces";
+import { usePagination } from "@hooks";
+import { stringToDateWithTime } from "@utils";
 
 interface Props {
   data: Client[];
@@ -25,61 +23,8 @@ interface Props {
 }
 
 export default function ClientsTable({ data, count }: Props) {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [isMounted, setIsMounted] = useState<boolean>(false);
-
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const route = useRouter();
-
-  const handleChangePage = (
-    _: MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (isMounted) {
-      const params = new URLSearchParams(searchParams);
-
-      if (page > 0) params.set("page", `${page + 1}`);
-      else params.delete("page");
-
-      if (rowsPerPage !== 5) params.set("limit", `${rowsPerPage}`);
-      else params.delete("limit");
-
-      route.replace(`${pathname}?${params.toString()}`);
-    }
-  }, [isMounted, page, rowsPerPage, searchParams, pathname, route]);
-
-  useEffect(() => {
-    if (isMounted) {
-      const params = new URLSearchParams(searchParams);
-
-      if (params.has("page")) {
-        const pageCurrent = parseInt(params.get("page") ?? "1", 10);
-        setPage(pageCurrent - 1);
-      }
-
-      if (params.has("limit")) {
-        const limitCurrent = parseInt(params.get("limit") ?? "5", 10);
-        setRowsPerPage(limitCurrent);
-      }
-    }
-  }, [isMounted, searchParams]);
+  const { page, rowsPerPage, handleChangePage, handleChangeRowsPerPage } =
+    usePagination();
 
   return (
     <TableContainer component={Paper}>
@@ -88,8 +33,13 @@ export default function ClientsTable({ data, count }: Props) {
           <StyledTableRow>
             <StyledTableCell>ID</StyledTableCell>
             <StyledTableCell>Nombre</StyledTableCell>
-            <StyledTableCell>Phone</StyledTableCell>
-            <StyledTableCell>Email</StyledTableCell>
+            <StyledTableCell>Teléfono</StyledTableCell>
+            <StyledTableCell>Correo</StyledTableCell>
+            <StyledTableCell>Estatus</StyledTableCell>
+            <StyledTableCell>Proyectos</StyledTableCell>
+            <StyledTableCell>Origen</StyledTableCell>
+            <StyledTableCell>Campaña</StyledTableCell>
+            <StyledTableCell>Creación</StyledTableCell>
           </StyledTableRow>
         </TableHead>
         <TableBody>
@@ -101,6 +51,13 @@ export default function ClientsTable({ data, count }: Props) {
               <StyledTableCell>{row.name}</StyledTableCell>
               <StyledTableCell>{row.phone}</StyledTableCell>
               <StyledTableCell>{row.email}</StyledTableCell>
+              <StyledTableCell>{row.status}</StyledTableCell>
+              <StyledTableCell></StyledTableCell>
+              <StyledTableCell>{row.origin}</StyledTableCell>
+              <StyledTableCell>{row.campaignType}</StyledTableCell>
+              <StyledTableCell>
+                {stringToDateWithTime(row.createdAt)}
+              </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
@@ -108,7 +65,7 @@ export default function ClientsTable({ data, count }: Props) {
           <StyledTableRow>
             <TablePagination
               rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-              colSpan={4}
+              colSpan={9}
               count={count}
               rowsPerPage={rowsPerPage}
               page={page}
