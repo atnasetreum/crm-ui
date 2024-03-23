@@ -15,10 +15,8 @@ const query = gql`
         name
         phone
         email
-        status
         birthdate
         reasonRejection
-        origin
         campaignType
         isActive
         createdAt
