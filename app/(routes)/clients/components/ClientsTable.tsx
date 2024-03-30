@@ -56,7 +56,7 @@ export default function ClientsTable({ data, count }: Props) {
                 {row.projects.map((project) => project.name).join(", ")}
               </StyledTableCell>
               <StyledTableCell>{row.origin.name}</StyledTableCell>
-              <StyledTableCell>{row.campaignType}</StyledTableCell>
+              <StyledTableCell>{row.campaign.name}</StyledTableCell>
               <StyledTableCell>
                 {stringToDateWithTime(row.createdAt)}
               </StyledTableCell>

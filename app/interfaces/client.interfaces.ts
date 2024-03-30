@@ -28,6 +28,9 @@ export interface Client {
   state: {
     name: string;
   };
+  campaign: {
+    name: string;
+  };
 }
 
 export interface SearchParamsClientsProps {

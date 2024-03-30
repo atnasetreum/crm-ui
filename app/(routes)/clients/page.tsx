@@ -28,6 +28,9 @@ const query = gql`
         state {
           name
         }
+        campaign {
+          name
+        }
       }
     }
   }
