@@ -15,11 +15,19 @@ export interface Client {
   status: string;
   birthdate: Date;
   reasonRejection: string;
-  origin: string;
   campaignType: string;
   isActive: boolean;
   createdAt: Date;
   updatedAt: Date;
+  projects: {
+    name: string;
+  }[];
+  origin: {
+    name: string;
+  };
+  state: {
+    name: string;
+  };
 }
 
 export interface SearchParamsClientsProps {

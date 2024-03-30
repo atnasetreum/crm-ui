@@ -51,9 +51,11 @@ export default function ClientsTable({ data, count }: Props) {
               <StyledTableCell>{row.name}</StyledTableCell>
               <StyledTableCell>{row.phone}</StyledTableCell>
               <StyledTableCell>{row.email}</StyledTableCell>
-              <StyledTableCell>{row.status}</StyledTableCell>
-              <StyledTableCell></StyledTableCell>
-              <StyledTableCell>{row.origin}</StyledTableCell>
+              <StyledTableCell>{row.state.name}</StyledTableCell>
+              <StyledTableCell>
+                {row.projects.map((project) => project.name).join(", ")}
+              </StyledTableCell>
+              <StyledTableCell>{row.origin.name}</StyledTableCell>
               <StyledTableCell>{row.campaignType}</StyledTableCell>
               <StyledTableCell>
                 {stringToDateWithTime(row.createdAt)}

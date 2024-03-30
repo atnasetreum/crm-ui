@@ -18,9 +18,16 @@ const query = gql`
         birthdate
         reasonRejection
         campaignType
-        isActive
         createdAt
-        updatedAt
+        projects {
+          name
+        }
+        origin {
+          name
+        }
+        state {
+          name
+        }
       }
     }
   }
